@@ -33,10 +33,35 @@ massive({
 
     // we need to save the variable db to our server so we can use it in other files
     app.set('db', db);
-    console.log('connected to database');
+    const ctrl = require('./serverCtrl');
+
+    // db.init_tables.people_create_seed()
+    //   .then(res => console.log('People Table created'))
+    //   .catch(err => console.log(err));
+    //
+    // db.init_tables.places_create_seed()
+    //   .then(res => console.log('Places Table created'))
+    //   .catch(err => console.log(err));
 
 
-  })
+    // ENDPOINTS:
+// GET
+    app.get('/api/people', ctrl.getPeople);
+
+    app.get('/api/places', ctrl.getPlaces);
+
+    app.get('/api/people/:id', ctrl.getPersonById);
+
+    app.get('/api/places/:id', ctrl.getPlaceById);
+
+    app.get('/api/people/:id/places', ctrl.getPlacesByPerson);
+
+// POST
+    app.post('/api/people', ctrl.newPerson);
+
+    app.post('/api/places', ctrl.newPlace);
+
+  }) //end of massive connection
   .catch((err) => console.log(err));
 
 

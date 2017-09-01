@@ -1,6 +1,6 @@
-DROP TABLE places;
+DROP TABLE IF EXISTS places;
 
-CREATE TABLE places (
+CREATE TABLE IF NOT EXISTS places (
     id SERIAL PRIMARY KEY,
     name TEXT,
     state TEXT,
@@ -8,8 +8,8 @@ CREATE TABLE places (
     person_id INTEGER REFERENCES people(id)
 );
 
-
 INSERT INTO places (name, state, type, person_id)
 VALUES ('DevMountain', 'AZ', 'School', 1),
 ('DVMTN', 'UT', 'School', 2),
-('DevMtn', 'TX', 'School', 3);
+('DevMtn', 'TX', 'School', 3)
+RETURNING *;
